@@ -90,14 +90,28 @@ The event list is:
 
 ### Q2.a
 
-$$ \frac{4+2+4+6+8+4+6+2+4+4+2+2+2+4+2+4+6+8+4+6}{20} = \frac{84}{20} = 4.2 $$
+$$ \frac{4+2+4+6+8+4+6+2+2+4+2+2+2+4+2+4+6+8+4+4}{20} = \frac{80}{20} = 4 $$
 
-$\therefore$ the Average Service Time is 4.2 seconds.
+$\therefore$ The Average Service Time is 4 seconds.
 
 ### Q2.b
 
+$$ \frac{11*2 + 9*6}{20} = \frac{76}{20} = 3.8 $$
+
+$\therefore$ The Average Interarrival Time is 3.8 seconds.
+
 ### Q2.c
 
+Where $\rho$ is the simulated utilization, $\lambda$ is the simulated arrival rate, and $\mu$ is the service rate.
+
 $$ \rho = \frac{\lambda}{\mu} $$
+
+$$ \lambda = \frac{1}{\text{Avg. Interarrival Time}} = \frac{1}{3.8} $$
+
+$$ \mu = \frac{1}{\text{Avg. Service Rate}} = \frac{1}{4} $$
+
+$\therefore$ The simulated utilization is:
+
+$$\rho = \frac{ \frac{1}{3.8} }{ \frac{1}{4} } = 1.052$$
 
 ## Question 3
