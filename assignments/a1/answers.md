@@ -90,9 +90,9 @@ The event list is:
 
 ### Q2.a
 
-$$ \frac{4+2+4+6+8+4+6+2+2+4+2+2+2+4+2+4+6+8+4+4}{20} = \frac{80}{20} = 4 $$
+$$ \frac{11*4 + 9*2}{20} = \frac{80}{20} = 3.1 $$
 
-$\therefore$ The Average Service Time is 4 seconds.
+$\therefore$ The Average Service Time is 3.1 seconds.
 
 ### Q2.b
 
@@ -102,16 +102,54 @@ $\therefore$ The Average Interarrival Time is 3.8 seconds.
 
 ### Q2.c
 
-Where $\rho$ is the simulated utilization, $\lambda$ is the simulated arrival rate, and $\mu$ is the service rate.
+Where $\rho$ is the simulated utilization, $\lambda$ is the simulated arrival rate, and $\mu$ is the service time.
 
 $$ \rho = \frac{\lambda}{\mu} $$
 
-$$ \lambda = \frac{1}{\text{Avg. Interarrival Time}} = \frac{1}{3.8} $$
+$$ \mu = \frac{1}{\text{Avg. Service Rate}} = \frac{1}{3.1} $$
 
-$$ \mu = \frac{1}{\text{Avg. Service Rate}} = \frac{1}{4} $$
+$$ \lambda = \frac{1}{\text{Avg. Interarrival Time}} = \frac{1}{3.8} $$
 
 $\therefore$ The simulated utilization is:
 
-$$\rho = \frac{ \frac{1}{3.8} }{ \frac{1}{4} } = 1.052$$
+$$ \rho = \frac{ \frac{1}{3.8} }{ \frac{1}{3.1} } = \frac{31}{38} $$
+
+### Q2.d
+
+Theoretical chance of `Heads`: 50%
+
+Theoretical chance of `Tails`: 50%
+
+Theoretical Service Time:
+
+$$ \frac{10*4 + 10*2}{20} = \frac{60}{20} = 3 $$
+
+Theoretical Interarrival time:
+
+$$ \frac{10*2 + 10*6}{20} = \frac{80}{20} = 4 $$
+
+The theoretical server utilization is:
+
+$$ \frac{ \frac{1}{4} }{ \frac{1}{3} } = \frac{3}{4} $$
+
+There is a discrepancy, yes, it's because stochastic processes are random therefore only estimates.
+
+### Q2.e
+
+The average time a customer spends in the system is:
+
+$$ \frac{ 4+2+4+6+8+4+6+2+2+4+2+2+2+4+2+4+6+8+4+4 }{ 20 } = 4 $$
+
+### Q2.f
+
+Average Service Time:
+
+$$ \frac{2\rho + 4(1-\rho)}{20} $$
+
+To compute the bounds of $\rho$ so that the system is stable we need to compute the $\rho$ value at $1.00$ utilization.
+
+$$ \frac{ \frac{6\rho + 2(1-\rho)}{20} }{ \frac{2\rho + 4(1-\rho)}{20} } < 1.00 $$
+
+Solving yields $\rho < \frac{1}{3}$.
 
 ## Question 3
