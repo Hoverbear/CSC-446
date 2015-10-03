@@ -153,3 +153,7 @@ $$ \frac{ \frac{6\rho + 2(1-\rho)}{20} }{ \frac{2\rho + 4(1-\rho)}{20} } < 1.00 
 Solving yields $\rho < \frac{1}{3}$.
 
 ## Question 3
+
+Since the spreadsheets provided are incompatible with LibreOffice the problem has been reimplemented in Rust.
+
+### Q3.a
