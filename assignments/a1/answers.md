@@ -154,6 +154,48 @@ Solving yields $\rho < \frac{1}{3}$.
 
 ## Question 3
 
-Since the spreadsheets provided are incompatible with LibreOffice the problem has been reimplemented in Rust.
+**Since the spreadsheets provided are incompatible with LibreOffice the problem has been reimplemented in Rust.**
 
-### Q3.a
+### Q3.a & Q3.b
+
+Code is included within the archive.
+
+### Q3.c
+
+On a (boring) 100 customers:
+
+```
+Average Waiting Time: 0.29
+Probability of Waiting: 0.22
+Probability of Idle Server: 0.50199203187251
+Average Service Time: 3.81
+Average Time Between Arrivals: 2.242424242424242
+Average Waiting time of those who wait: 1.3181818181818181
+Average Time Caller Spends in System: 4.1
+```
+
+### Q4.c
+
+Modified Policy:
+
+```
+Average Waiting Time: 0.225
+Probability of Waiting: 0.17
+Probability of Idle Server: 0.5231388329979879
+Average Service Time: 3.705
+Average Time Between Arrivals: 2.271356783919598
+Average Waiting time of those who wait: 1.3235294117647058
+Average Time Caller Spends in System: 3.93
+```
+
+Original:
+
+```
+
+```
+
+Code Diff for original policy:
+
+```
+
+```

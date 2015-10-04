@@ -1,7 +1,7 @@
 extern crate rand;
 use rand::distributions::{IndependentSample, Range};
 
-const NUM_CALLERS: u64 = 20000;
+const NUM_CALLERS: u64 = 200;
 
 struct Server {
     name: String,
