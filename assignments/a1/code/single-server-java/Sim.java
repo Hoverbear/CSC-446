@@ -7,6 +7,10 @@ public static double Clock, MeanInterArrivalTime, MeanServiceTime, SIGMA, LastEv
 public static long  NumberOfCustomers, QueueLength, NumberInService,
         TotalCustomers, NumberOfDepartures, LongService;
 
+// Calculate the mean service and interarrival time.
+public static double TotalServiceTime = 0;
+public static double TotalInterArrivalTime = 0;
+
 public final static int arrival = 1;
 public final static int departure = 2;
 
@@ -17,13 +21,13 @@ public static Random stream;
 public static void main(String argv[]) {
 
   MeanInterArrivalTime = 4.5; MeanServiceTime = 3.2;
-  SIGMA                = 0.6; TotalCustomers  = 1000;
+  SIGMA                = 0.6; TotalCustomers  = 5000;
   long seed            = Long.parseLong(argv[0]);
 
   stream = new Random(seed);           // initialize rng stream
   FutureEventList = new EventList();
   Customers = new Queue();
- 
+
   Initialization();
 
   // Loop until first "TotalCustomers" have departed
@@ -38,7 +42,7 @@ public static void main(String argv[]) {
  }
 
  // seed the event list with TotalCustomers arrivals
- public static void Initialization()   { 
+ public static void Initialization()   {
   Clock = 0.0;
   QueueLength = 0;
   NumberInService = 0;
@@ -55,7 +59,7 @@ public static void main(String argv[]) {
  }
 
  public static void ProcessArrival(Event evt) {
-  Customers.enqueue(evt); 
+  Customers.enqueue(evt);
   QueueLength++;
   // if the server is idle, fetch the event, do statistics
   // and put into service
@@ -66,7 +70,9 @@ public static void main(String argv[]) {
   if (MaxQueueLength < QueueLength) MaxQueueLength = QueueLength;
 
   // schedule the next arrival
-  Event next_arrival = new Event(arrival, Clock+exponential(stream, MeanInterArrivalTime));
+  double next_interarrival_time = exponential(stream, MeanInterArrivalTime);
+  TotalInterArrivalTime += next_interarrival_time;
+  Event next_arrival = new Event(arrival, Clock+next_interarrival_time);
   FutureEventList.enqueue( next_arrival );
   LastEventTime = Clock;
  }
@@ -74,7 +80,8 @@ public static void main(String argv[]) {
  public static void ScheduleDeparture() {
   double ServiceTime;
   // get the job at the head of the queue
-  while (( ServiceTime = normal(stream, MeanServiceTime, SIGMA)) < 0 );
+  while (( ServiceTime = exponential(stream, MeanServiceTime)) < 0 );
+  TotalServiceTime += ServiceTime;
   Event depart = new Event(departure,Clock+ServiceTime);
   FutureEventList.enqueue( depart );
   NumberInService = 1;
@@ -104,17 +111,17 @@ double PC4   = ((double)LongService)/TotalCustomers;
 
 
 System.out.println( "SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER ");
-System.out.println( "\tMEAN INTERARRIVAL TIME                         " 
-	+ MeanInterArrivalTime );
-System.out.println( "\tMEAN SERVICE TIME                              " 
-	+ MeanServiceTime );
+System.out.println( "\tMEAN INTERARRIVAL TIME                         "
+	+ (TotalInterArrivalTime / TotalCustomers) );
+System.out.println( "\tMEAN SERVICE TIME                              "
+	+ (TotalServiceTime / TotalCustomers) );
 System.out.println( "\tSTANDARD DEVIATION OF SERVICE TIMES            " + SIGMA );
 System.out.println( "\tNUMBER OF CUSTOMERS SERVED                     " + TotalCustomers );
-System.out.println(); 
+System.out.println();
 System.out.println( "\tSERVER UTILIZATION                             " + RHO );
 System.out.println( "\tMAXIMUM LINE LENGTH                            " + MaxQueueLength );
 System.out.println( "\tAVERAGE RESPONSE TIME                          " + AVGR + "  MINUTES" );
-System.out.println( "\tPROPORTION WHO SPEND FOUR "); 
+System.out.println( "\tPROPORTION WHO SPEND FOUR ");
 System.out.println( "\t MINUTES OR MORE IN SYSTEM                     " + PC4 );
 System.out.println( "\tSIMULATION RUNLENGTH                           " + Clock + " MINUTES" );
 System.out.println( "\tNUMBER OF DEPARTURES                           " + TotalCustomers );
@@ -144,4 +151,3 @@ public static double normal(Random rng, double mean, double sigma) {
         return ReturnNormal*sigma + mean ;
  }
 }
-

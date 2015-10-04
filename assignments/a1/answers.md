@@ -162,7 +162,7 @@ Code is included within the archive.
 
 ### Q3.c
 
-On a (boring) 100 customers:
+On a 100 customers:
 
 ```
 Average Waiting Time: 0.29
@@ -174,7 +174,7 @@ Average Waiting time of those who wait: 1.3181818181818181
 Average Time Caller Spends in System: 4.1
 ```
 
-### Q4.c
+### Q3.c
 
 Modified Policy:
 
@@ -191,11 +191,368 @@ Average Time Caller Spends in System: 3.93
 Original:
 
 ```
-
+Average Waiting Time: 0.225
+Probability of Waiting: 0.16
+Probability of Idle Server: 0.5766129032258065
+Average Service Time: 3.555
+Average Time Between Arrivals: 2.2663316582914574
+Average Waiting time of those who wait: 1.40625
+Average Time Caller Spends in System: 3.78
 ```
 
 Code Diff for original policy:
 
+```diff
+--- a/assignments/a1/code/able-baker/src/main.rs
++++ b/assignments/a1/code/able-baker/src/main.rs
+@@ -118,21 +118,7 @@ fn main() {
+         // If both idle, choose randomly.
+         // If one idle, assign to it.
+         // If both busy, choose soonest available.
+-        if (able.busy_until < clock) && (baker.busy_until < clock) {
+-            let mut rng = rand::thread_rng();
+-            let range = Range::new(0u64, 100);
+-            let rand_val = range.ind_sample(&mut rng);
+-            // No waiting.
+-            caller.waiting_time = Some(0);
+-            // There is an idle time!
+-            if rand_val <= 50 {
+-                able.idle_time = able.idle_time + (clock - able.busy_until);
+-                able.serve(&mut clock, &mut caller);
+-            } else {
+-                baker.idle_time = baker.idle_time + (clock - baker.busy_until);
+-                baker.serve(&mut clock, &mut caller);
+-            }
+-        } else if able.busy_until < clock {
++        if able.busy_until < clock {
+             // No waiting.
+             caller.waiting_time = Some(0);
+             // There is an idle time for Able
 ```
 
+The new policy is anecdotally better in these few simulations. This is because it more rapidly balances load across the two servers.
+
+## Question 4
+
+**This Java code is exceptionally strange, some modifications automatically done by editor, not myself, to make it remotely sane.**
+
+The diff for modifying the code to calculate average service and interarrival times is:
+
+```diff
+@@ -7,6 +7,10 @@ public static double Clock, MeanInterArrivalTime, MeanServiceTime, SIGMA, LastEv
+ public static long  NumberOfCustomers, QueueLength, NumberInService,
+         TotalCustomers, NumberOfDepartures, LongService;
+
++// Calculate the mean service and interarrival time.
++public static double TotalServiceTime = 0;
++public static double TotalInterArrivalTime = 0;
++
+ public final static int arrival = 1;
+ public final static int departure = 2;
+
+@@ -66,7 +70,9 @@ public static void main(String argv[]) {
+   if (MaxQueueLength < QueueLength) MaxQueueLength = QueueLength;
+
+   // schedule the next arrival
+-  Event next_arrival = new Event(arrival, Clock+exponential(stream, MeanInterArrivalTime));
++  double next_interarrival_time = exponential(stream, MeanInterArrivalTime);
++  TotalInterArrivalTime += next_interarrival_time;
++  Event next_arrival = new Event(arrival, Clock+next_interarrival_time);
+   FutureEventList.enqueue( next_arrival );
+   LastEventTime = Clock;
+  }
+@@ -75,6 +81,7 @@ public static void main(String argv[]) {
+   double ServiceTime;
+   // get the job at the head of the queue
+   while (( ServiceTime = normal(stream, MeanServiceTime, SIGMA)) < 0 );
++  TotalServiceTime += ServiceTime;
+   Event depart = new Event(departure,Clock+ServiceTime);
+   FutureEventList.enqueue( depart );
+   NumberInService = 1;
+@@ -104,17 +111,17 @@ double PC4   = ((double)LongService)/TotalCustomers;
+
+
+ System.out.println( "SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER ");
+-System.out.println( "\tMEAN INTERARRIVAL TIME                         "
+-	+ MeanInterArrivalTime );
+-System.out.println( "\tMEAN SERVICE TIME                              "
+-	+ MeanServiceTime );
++System.out.println( "\tMEAN INTERARRIVAL TIME                         "
++	+ (TotalInterArrivalTime / TotalCustomers) );
++System.out.println( "\tMEAN SERVICE TIME                              "
++	+ (TotalServiceTime / TotalCustomers) );
+ System.out.println( "\tSTANDARD DEVIATION OF SERVICE TIMES            " + SIGMA );
+ System.out.println( "\tNUMBER OF CUSTOMERS SERVED                     " + TotalCustomers );
 ```
+
+### Q4.a
+
+```java
+MeanInterArrivalTime = 4.5;
+// ...
+Event next_arrival = new Event(arrival, Clock+exponential(stream, MeanInterArrivalTime));
+```
+
+$\therefore$ `4.5` and Exponential.
+
+### Q4.b
+
+```java
+MeanServiceTime = 3.2;
+// ...
+while (( ServiceTime = normal(stream, MeanServiceTime, SIGMA)) < 0 );
+```
+
+$\therefore$ `3.2` and Normal.
+
+### Q4.c
+
+<!-- TODO -->
+
+### Q4.d
+
+Seed of `1`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.474767351330928
+	MEAN SERVICE TIME                              3.205465396384677
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     1000
+
+	SERVER UTILIZATION                             0.7154468565718423
+	MAXIMUM LINE LENGTH                            9.0
+	AVERAGE RESPONSE TIME                          6.943036600826695  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.667
+	SIMULATION RUNLENGTH                           4474.645676201413 MINUTES
+	NUMBER OF DEPARTURES                           1000
+```
+
+Seed of `2`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.43090269543457
+	MEAN SERVICE TIME                              3.1866357652352666
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     1000
+
+	SERVER UTILIZATION                             0.71902369792077
+	MAXIMUM LINE LENGTH                            14.0
+	AVERAGE RESPONSE TIME                          8.947211232575318  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.694
+	SIMULATION RUNLENGTH                           4431.892543250238 MINUTES
+	NUMBER OF DEPARTURES                           1000
+```
+
+### Q4.e
+
+Seed of `3`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.415666273123853
+	MEAN SERVICE TIME                              3.213289831693823
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     5000
+
+	SERVER UTILIZATION                             0.7275907905216983
+	MAXIMUM LINE LENGTH                            15.0
+	AVERAGE RESPONSE TIME                          7.867269519507706  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.6968
+	SIMULATION RUNLENGTH                           22078.202627905997 MINUTES
+	NUMBER OF DEPARTURES                           5000
+```
+
+Seed of `4`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.441362660932404
+	MEAN SERVICE TIME                              3.2007940754753883
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     5000
+
+	SERVER UTILIZATION                             0.7210881468715392
+	MAXIMUM LINE LENGTH                            10.0
+	AVERAGE RESPONSE TIME                          7.497442853219246  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.681
+	SIMULATION RUNLENGTH                           22190.093430508758 MINUTES
+	NUMBER OF DEPARTURES                           5000
+```
+
+### Q4.f
+
+The specified outputs (mean inter-arrival time, mean service time, server utilization and mean response time) are not significantly affected by raising the amount of customers or changing the seed.
+
+### Q4.g
+
+```diff
+- while (( ServiceTime = normal(stream, MeanServiceTime, SIMGA)) < 0 );
++ while (( ServiceTime = exponential(stream, MeanServiceTime)) < 0 );
+```
+
+Seed `5`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.447823890055081
+	MEAN SERVICE TIME                              3.149403896391417
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     1000
+
+	SERVER UTILIZATION                             0.7078971020757688
+	MAXIMUM LINE LENGTH                            11.0
+	AVERAGE RESPONSE TIME                          9.593773298308685  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.687
+	SIMULATION RUNLENGTH                           4448.9571819921475 MINUTES
+	NUMBER OF DEPARTURES                           1000
+```
+
+Seed `6`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.6600612521778
+	MEAN SERVICE TIME                              3.0989400524232003
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     1000
+
+	SERVER UTILIZATION                             0.666161570357085
+	MAXIMUM LINE LENGTH                            10.0
+	AVERAGE RESPONSE TIME                          8.260061297381522  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.66
+	SIMULATION RUNLENGTH                           4650.332091699408 MINUTES
+	NUMBER OF DEPARTURES                           1000
+```
+
+### Q4.h
+
+**Assuming we still use the code from Q4.g.**
+
+Seed `7`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.403470897484633
+	MEAN SERVICE TIME                              3.15350165785368
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     5000
+
+	SERVER UTILIZATION                             0.716259545501339
+	MAXIMUM LINE LENGTH                            15.0
+	AVERAGE RESPONSE TIME                          10.867609877240296  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.6978
+	SIMULATION RUNLENGTH                           22012.236273517236 MINUTES
+	NUMBER OF DEPARTURES                           5000
+```
+
+Seed `8`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.598245423933367
+	MEAN SERVICE TIME                              3.1966901623828328
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     5000
+
+	SERVER UTILIZATION                             0.6950843404794042
+	MAXIMUM LINE LENGTH                            16.0
+	AVERAGE RESPONSE TIME                          9.793335102067426  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.6812
+	SIMULATION RUNLENGTH                           22992.105334684264 MINUTES
+	NUMBER OF DEPARTURES                           5000
+```
+
+Seed `9`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.443506280798436
+	MEAN SERVICE TIME                              3.2469910343643287
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     5000
+
+	SERVER UTILIZATION                             0.7306452967151716
+	MAXIMUM LINE LENGTH                            30.0
+	AVERAGE RESPONSE TIME                          11.426843472500124  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.714
+	SIMULATION RUNLENGTH                           22218.7191194186 MINUTES
+	NUMBER OF DEPARTURES                           5000
+```
+
+Seed `10`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.398235311240714
+	MEAN SERVICE TIME                              3.168403147687611
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     5000
+
+	SERVER UTILIZATION                             0.7204563037404577
+	MAXIMUM LINE LENGTH                            22.0
+	AVERAGE RESPONSE TIME                          12.031856635584338  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.6928
+	SIMULATION RUNLENGTH                           21988.583976479018 MINUTES
+	NUMBER OF DEPARTURES                           5000
+
+```
+
+Seed `11`:
+
+```
+SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
+	MEAN INTERARRIVAL TIME                         4.462716023207889
+	MEAN SERVICE TIME                              3.1813326702943683
+	STANDARD DEVIATION OF SERVICE TIMES            0.6
+	NUMBER OF CUSTOMERS SERVED                     5000
+
+	SERVER UTILIZATION                             0.7127609636930727
+	MAXIMUM LINE LENGTH                            18.0
+	AVERAGE RESPONSE TIME                          10.523241687605557  MINUTES
+	PROPORTION WHO SPEND FOUR
+	 MINUTES OR MORE IN SYSTEM                     0.6882
+	SIMULATION RUNLENGTH                           22311.158536622694 MINUTES
+	NUMBER OF DEPARTURES                           5000
+```
+
+* Mean Interarrival:
+    + Mean:
+
+$$ \frac{ 4.403470897484633 + 4.598245423933367 + 4.443506280798436 + 4.398235311240714 + 4.462716023207889 }{ 5 } $$
+
+$$ = 4.4612347873330078 $$
+
+    + Variance:
+
+$$ \frac{ (4.403470897484633 - 4.4612347873330078)^2 + (4.598245423933367 - 4.4612347873330078)^2 + (4.443506280798436 - 4.4612347873330078)^2 + (4.398235311240714 - 4.4612347873330078)^2 + (4.462716023207889 - 4.4612347873330078)^2 }{ 5 } $$
+
+$$ = 0.00527880190072355068961864785736 $$
+
+* Mean Service Time:
+    + Mean: $3.18938373451656416$
+
+    + Variance: $0.00103290259367070007$
+
+* Server Utilization:
+    + Mean: $0.71504129002588904$
+
+    + Variance: $0.00013555425361533648$
+
+* Mean Response Time:
+    + Mean: $10.9285773549995482$
+
+    + Variance: $0.58445666085304932742$
+
+## Question 5
