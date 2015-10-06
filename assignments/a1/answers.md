@@ -154,7 +154,7 @@ Solving yields $\rho < \frac{1}{3}$.
 
 ## Question 3
 
-**Since the spreadsheets provided are incompatible with LibreOffice the problem has been reimplemented in Rust.**
+**Since the spreadsheets provided are incompatible with LibreOffice the problem has been reimplemented in Rust. See `code/able-baker/src/main.rs`**
 
 ### Q3.a & Q3.b
 
@@ -234,7 +234,7 @@ The new policy is anecdotally better in these few simulations. This is because i
 
 ## Question 4
 
-**This Java code is exceptionally strange, some modifications automatically done by editor, not myself, to make it remotely sane.**
+**This Java code is exceptionally strange.**
 
 The diff for modifying the code to calculate average service and interarrival times is:
 
@@ -307,7 +307,9 @@ $\therefore$ `3.2` and Normal.
 
 ### Q4.c
 
-<!-- TODO -->
+$$ \rho = \frac{ \frac{1}{4.5} }{ \frac{1}{3.2} } $$
+
+$$ \rho = 0.711\bar{1} $$
 
 ### Q4.d
 
@@ -556,3 +558,118 @@ $$ = 0.00527880190072355068961864785736 $$
     + Variance: $0.58445666085304932742$
 
 ## Question 5
+
+1 trial:
+
+| Bin | Freq | Prob |
+|-----|------|------|
+| 3   | 8    | $\frac{8}{25}=.32$ |
+| 6   | 11   | $\frac{11}{25}=.44$ |
+| 10  | 6    | $\frac{6}{25}=.24$ |
+
+5 trial:
+
+| Bin | Freq              | Prob                  |
+|-----|-------------------|-----------------------|
+| 3   | 7+7+8+4+8=34      | $\frac{34}{125}=.272$ |
+| 6   | 13+11+10+13+13=60 | $\frac{60}{125}=.480$ |
+| 10  | 5+7+7+8+4=31      | $\frac{31}{125}=.248$ |
+
+10 trial:
+
+| Bin | Freq                            | Prob              |
+|-----|---------------------------------|-------------------|
+| 3   | 6+5+8+10+10+10+11+8+11+4=83     | $\frac{83}{250}=.332$ |
+| 6   | 16+14+11+10+13+9+8+10+7+14=112  | $\frac{112}{250}=.448$ |
+| 10  | 3+6+6+5+2+6+6+7+7+7=55          | $\frac{55}{250}=.22$ |
+
+The simulation fits the intended distribution within reason. Excels terrible random number generator helps skew the results a bit.
+
+## Question 6
+
+### Q6.a
+
+$$ \frac{ 1*0 + 4*1 + 11*2 + 35*3 + 60*4 + 47*5 + 22*6 + 18*7 + 0*8 + 2*9 + 0*10}{ 200 } = 4.41 $$
+
+### Q6.b
+
+$$ \frac{ 2*0 + 8*1 + 30*2 + 85*3 + 85*4 + 101*5 + 52*6 + 27*7 + 9*8 + 1*9 + 0*10 }{ 400 } = 4.375 $$
+
+### Q6.c
+
+$$ \frac{ 1*5 + 4*6 + 13*7 + 47*8 + 88*9 + 47*10 }{ 200 } = 8.79 $$
+
+### Q6.d
+
+$$ \frac{ 1*2 + 1*3 + 15*4 + 5*17 + 57*6 + 54*7 + 41*8 + 13*9 + 1*10 }{ 200 } = 6.625 $$
+
+### Q6.e
+
+Noting that the goal is **0.6** hits average.
+
+Let $\rho_x = 700$.
+
+### Q6.f
+
+We can infer that:
+
+* The average number of hits does not change if the sample size does not change.
+* Small changes to one variable can lead to dramatic differences in results (Eg $c$ compared to $d$)
+* To find extremes in average number of hits you need to work at extreme values.
+
+## Question 7
+
+**See `code/parameter/src/main.rs`**
+
+### Q7.a
+
+```
+p hat: 0.296
+Normalized estimation error: 0.013333333333333346
+```
+
+### Q7.b
+
+```
+p hat: 0.091
+Normalized estimation error: 0.09000000000000008
+```
+
+### Q7.c
+
+```
+p hat: 0.001
+Normalized estimation error: 0
+```
+
+### Q7.d
+
+```
+p hat: 0
+Normalized estimation error: 1
+```
+
+### Q7.e
+
+We can conclude that 1000 is a very small sample set when dealing with numbers this small. To reduce estimation error increase the sample size.
+
+For example, setting $p=0.4$ and doing `10_000_000` trials:
+
+```
+p hat: 0.3999753
+Normalized estimation error: 0.00006175000000011033
+```
+
+Or, setting the trials to `100_000_000`:
+
+```
+p hat: 0.39991376
+Normalized estimation error: 0.00021560000000003798
+```
+
+Then, setting the trials to `1_000_000_000`:
+
+```
+p hat: 0.399994077
+Normalized estimation error: 0.000014807500000046936
+```
