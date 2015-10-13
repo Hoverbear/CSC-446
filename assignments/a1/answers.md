@@ -37,7 +37,7 @@ The simulation table is:
 | 17     | T   | 2            | 66      | 4       | 68             | 2       | 72           | 6     | 0    |
 | 18     | T   | 2            | 68      | 4       | 72             | 4       | 76           | 8     | 0    |
 | 19     | H   | 6            | 74      | 2       | 76             | 2       | 78           | 4     | 0    |
-| 20     | T   | 2            | 76      | 4       | 78             | 2       | 80           | 4     | 0    |
+| 20     | T   | 2            | 76      | 4       | 78             | 2       | 82           | 6     | 0    |
 
 
 
@@ -84,7 +84,7 @@ The event list is:
 | 76     | 18         | Depart  |
 | 76     | 20         | Arrival |
 | 78     | 19         | Depart  |
-| 80     | 20         | Depart  |
+| 82     | 20         | Depart  |
 
 ## Question 2
 
@@ -138,7 +138,7 @@ There is a discrepancy, yes, it's because stochastic processes are random theref
 
 The average time a customer spends in the system is:
 
-$$ \frac{ 4+2+4+6+8+4+6+2+2+4+2+2+2+4+2+4+6+8+4+4 }{ 20 } = 4 $$
+$$ \frac{ 4+2+4+6+8+4+6+2+2+4+2+2+2+4+2+4+6+8+4+6 }{ 20 } = 4.1 $$
 
 ### Q2.f
 
@@ -150,7 +150,7 @@ To compute the bounds of $\rho$ so that the system is stable we need to compute 
 
 $$ \frac{ \frac{6\rho + 2(1-\rho)}{20} }{ \frac{2\rho + 4(1-\rho)}{20} } < 1.00 $$
 
-Solving yields $\rho < \frac{1}{3}$.
+Solving yields $1 > \rho > \frac{1}{3}$.
 
 ## Question 3
 
@@ -174,7 +174,7 @@ Average Waiting time of those who wait: 1.3181818181818181
 Average Time Caller Spends in System: 4.1
 ```
 
-### Q3.c
+### Q3.d
 
 Modified Policy:
 
@@ -230,7 +230,7 @@ Code Diff for original policy:
              // There is an idle time for Able
 ```
 
-The new policy is anecdotally better in these few simulations. This is because it more rapidly balances load across the two servers.
+The new policy is anecdotally better in these few simulations. This is because it more rapidly balances load across the two servers. The probability that Able & Baker are both idle is considerably low.
 
 ## Question 4
 
@@ -389,7 +389,7 @@ SINGLE SERVER QUEUE SIMULATION - GROCERY STORE CHECKOUT COUNTER
 
 ### Q4.f
 
-The specified outputs (mean inter-arrival time, mean service time, server utilization and mean response time) are not significantly affected by raising the amount of customers or changing the seed.
+The specified outputs (mean inter-arrival time, mean service time, server utilization and mean response time) are not significantly affected by raising the amount of customers or changing the seed. Increasing the population does make it fit the theory better though.
 
 ### Q4.g
 
