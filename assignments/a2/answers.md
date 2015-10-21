@@ -74,3 +74,21 @@ $$ F(1.5) = \frac{1}{2} + \frac{1}{2}( 1 - 1.5 )( 1.5 - 3 ) = 0.875 $$
 $$ F(0.5) = \frac{(0.5)^2}{2} = 0.125 $$
 
 $$ P(0.5 \leq X \leq 1.5) = 0.875 - 0.125 = 0.75 $$
+
+### Q1.e
+
+$$ E[X] = \int_\infty^\infty x f(x) dx $$
+
+Decomposing the piecewise function, recalling $c=2$:
+
+$$ E[X] = (\int_{-\infty}^0 x(0) dx) + (\int_0^{1} x(x) dx) + (\int_{1}^2 x(-x+2) dx) $$
+
+$$ E[X] = 0 + (\frac{1^3}{3} - \frac{0^3}{3}) + ((2^2-\frac{2^3}{3}) - (1^2-\frac{1^3}{3})) = 1 $$
+
+Finding $V[X]$:
+
+$$ V[X] = E(X^2) - \mu $$
+
+$$ V[X] = (\int_{-\infty}^0 x^2(0) dx) + (\int_0^{1} x^2(x) dx) + (\int_{1}^2 x^2(-x+2) dx) - 1^2 $$
+
+$$ V[X] = 0 + (\frac{1^4}{4} - \frac{0^4}{4}) + ((\frac{2(2)^3}{3} - \frac{(2)^4}{4}) - (\frac{2(1)^3}{3} - \frac{(1)^4}{4})) - 1^2 = \frac{1}{6} $$
