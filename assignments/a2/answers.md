@@ -92,3 +92,15 @@ $$ V[X] = E(X^2) - \mu $$
 $$ V[X] = (\int_{-\infty}^0 x^2(0) dx) + (\int_0^{1} x^2(x) dx) + (\int_{1}^2 x^2(-x+2) dx) - 1^2 $$
 
 $$ V[X] = 0 + (\frac{1^4}{4} - \frac{0^4}{4}) + ((\frac{2(2)^3}{3} - \frac{(2)^4}{4}) - (\frac{2(1)^3}{3} - \frac{(1)^4}{4})) - 1^2 = \frac{1}{6} $$
+
+### Q1.f
+
+$$
+f(x) = \left\{
+        \begin{array}{ll}
+            \frac{x}{2}    & \quad 0 \leq x < c \\
+            -\frac{x}{2}+c & \quad c \leq x \leq 2c \\
+            0    & \quad x < 0, x > 2c
+        \end{array}
+    \right.
+$$
