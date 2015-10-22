@@ -147,10 +147,16 @@ $$ \omega_Q = $$
 
 ## Question 5
 
-Arrival Rate: $\lambda = 30 \text{per hr}$
+Provided:
 
-Mean: $\frac{1}{\mu} = 90 s$
+* Arrival Rate: $\lambda = 30 \text{per hr} = \frac{1}{2} \text{per minute} = \frac{1}{120} \text{per second}$
+* Mean: $\frac{1}{\mu} = 90 s$
+* Deviation: $\sigma = 90 s$
+* Variance: $\sigma^2 = (90 s)^2$
 
-Deviation: $\sigma = 90 s$
+Determining:
 
-Variance: $\sigma^2 = (90 s)^2$
+* $\mu = \frac{1}{90 s}$
+* Utilization: $\rho = \frac{ \lambda }{ \mu } = \frac{ \frac{1}{120} \text{per second} }{ \frac{1}{90 s} } = \frac{3}{4}$
+* $L_Q = \frac{ \rho^2(1+\sigma^2\mu^2) }{ 2(1-\rho) }$
+* $\omega_Q = \frac{ \lambda(\frac{1}{\mu^2} + \sigma^2) }{ 2(1-\rho) }$
