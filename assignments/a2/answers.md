@@ -104,3 +104,53 @@ f(x) = \left\{
         \end{array}
     \right.
 $$
+
+## Question 2
+
+<!-- TODO -->
+
+## Question 3
+
+### What is the Average Service Time at the Security-Check?
+
+Given:
+
+$$ \lambda_1 = 10 \frac{cus}{hr} = \frac{1}{6} \frac{cus}{min}$$
+$$ \lambda_2 = 20 \frac{cus}{hr} = \frac{2}{6} \frac{cus}{min}$$
+$$ \frac{1}{\mu_1} = 2 \frac{min}{cus} $$
+$$ \mu_1 = \frac{1}{2} \frac{cus}{min} $$
+$$ \rho_s = \frac{\lambda}{\mu} = .80 $$
+
+Determining:
+
+$$ \rho_s = \frac{ \lambda_1 + \lambda_2 }{ \mu_s } $$
+$$ .80 = \frac{ \frac{1}{6} + \frac{2}{6} }{ \mu_s } $$
+
+$$ \mu_s = \frac{ \frac{1}{6} + \frac{2}{6} }{ .80 } $$
+$$ \mu_s = \frac{5}{8} $$
+
+$$ \frac{1}{\mu_s} = 1.6 \frac{min}{cus} $$
+
+### What is the performance metrics for Terminal 1 Check-in?
+
+<!-- TODO -->
+
+$$ \rho = \frac{ \lambda_1 }{ \mu_1 } = \frac{ \frac{1}{6} \frac{cus}{min} }{ \frac{1}{2} \frac{cus}{min} } = \frac{1}{3} $$
+$$ L = \lambda_1 \omega_1 $$
+$$ L_Q = $$
+$$ \omega = $$
+$$ \omega_Q = $$
+
+## Question 4
+
+<!-- TODO -->
+
+## Question 5
+
+Arrival Rate: $\lambda = 30 \text{per hr}$
+
+Mean: $\frac{1}{\mu} = 90 s$
+
+Deviation: $\sigma = 90 s$
+
+Variance: $\sigma^2 = (90 s)^2$
