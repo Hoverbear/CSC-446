@@ -133,13 +133,23 @@ $$ \frac{1}{\mu_s} = 1.6 \frac{min}{cus} $$
 
 ### What is the performance metrics for Terminal 1 Check-in?
 
-<!-- TODO -->
+Using $M/M/1$ model:
 
 $$ \rho = \frac{ \lambda_1 }{ \mu_1 } = \frac{ \frac{1}{6} \frac{cus}{min} }{ \frac{1}{2} \frac{cus}{min} } = \frac{1}{3} $$
-$$ L = \lambda_1 \omega_1 $$
-$$ L_Q = $$
-$$ \omega = $$
-$$ \omega_Q = $$
+$$ L= \frac{\rho}{1-\rho} = \frac{ \frac{1}{3} }{ 1 - \frac{1}{3} } = \frac{1}{2} $$
+$$ L_Q = \frac{ \rho^2 }{ 1-\rho } = \frac{ (\frac{1}{3})^2 }{ 1- \frac{1}{3} } = \frac{1}{6} $$
+$$ \omega = \frac{1}{ \mu(1-\rho) } = \frac{ 1 }{ \frac{1}{2}(1 - \frac{1}{3}) } = 3 $$
+$$ \omega_Q = \frac{ \rho }{ \mu(1-\rho) } = \frac{ \frac{1}{3} }{ \frac{1}{2} (1 - \frac{1}{3}) } = 1 $$
+
+### What are the performance metrics for Security-Check?
+
+Using $M/M/1$ model with $\mu_s = \frac{5}{8}$:
+
+$$ \rho = \frac{ \lambda_1 + \lambda_2 }{ \mu_1 } = \frac{ \frac{1}{6} + \frac{2}{6} }{ \frac{5}{8} } = \frac{4}{5} $$
+$$ L= \frac{\rho}{1-\rho} = \frac{ \frac{4}{5} }{ 1-\frac{4}{5} } = 4 $$
+$$ L_Q = \frac{ \rho^2 }{ 1-\rho } = \frac{ (\frac{4}{5})^2 }{ 1- \frac{4}{5} } = \frac{16}{5} $$
+$$ \omega = \frac{1}{ \mu_s(1-\rho) } = \frac{ 1 }{ \frac{5}{8}(1-\frac{4}{5}) } = 8 $$
+$$ \omega_Q = \frac{ \rho }{ \mu_s(1-\rho) } = \frac{ \frac{4}{5} }{ \frac{5}{8} (1- \frac{4}{5})} = \frac{32}{5} $$
 
 ## Question 4
 
