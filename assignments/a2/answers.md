@@ -151,6 +151,22 @@ $$ L_Q = \frac{ \rho^2 }{ 1-\rho } = \frac{ (\frac{4}{5})^2 }{ 1- \frac{4}{5} } 
 $$ \omega = \frac{1}{ \mu_s(1-\rho) } = \frac{ 1 }{ \frac{5}{8}(1-\frac{4}{5}) } = 8 $$
 $$ \omega_Q = \frac{ \rho }{ \mu_s(1-\rho) } = \frac{ \frac{4}{5} }{ \frac{5}{8} (1- \frac{4}{5})} = \frac{32}{5} $$
 
+### What is the total average time spent by Terminal 1 passengers in the system?
+
+The total time spent by Terminal 1 passengers will be $\omega_1 + \omega_2 = 3+8 = 11$
+
+### What is the total average number of Terminal 1 passengers in the system?
+
+The total average number of Terminal One passengers in the system will be:
+
+$$ L_1 + \frac{\lambda_1}{\lambda_1 +\lambda_s}L_S = \frac{1}{2} + \frac{\frac{1}{6}}{ \frac{1}{6}+\frac{2}{6} }(4) = \frac{11}{6} $$
+
+### What is the average time spent by Terminal 2 passengers in the system?
+
+The total time spent by Terminal 2 passengers will be equal to $\omega_s$ since through that and do not receive a priority.
+
+$$ \omega_s = 8 $$
+
 ## Question 4
 
 <!-- TODO -->
