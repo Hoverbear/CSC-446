@@ -107,7 +107,10 @@ $$
 
 ## Question 2
 
-<!-- TODO -->
+We note that $E[A+B] = E[A] + E[B]$ and $V[A+B] = V[A] + V[B]$.
+
+$$ E[Y] = \sum_{i=1}^n E[X_i] = \sum_{i=1}^n \eta = n\eta $$
+$$ V[Y] = \sum_{i=1}^n V[X_i] = \sum_{i=1}^n \sigma^2 = n\sigma^2$$
 
 ## Question 3
 
@@ -198,3 +201,23 @@ At $\frac{25}{18}$ USD per second, the average cost is $270(\frac{25}{18}) = 375
 <!-- TODO -->
 
 ## Question 8
+
+This is $M/M/1$ queues chained together with:
+
+$$ \lambda = 1 \text{ per hr} $$
+$$ \mu = 4 \text{ per hr} $$
+
+Then the **mean** ($E[X]$) and **variance** ($V[X]$) are:
+
+$$ E[X] = \sum_{i=1}^3 \frac{1}{\mu} = \sum_{i=1}^3 \frac{1}{4} = \frac{3}{4} = \frac{1}{\mu_t}$$
+$$ V[X] = \sum_{i=1}^3 V[x_i] = \sum_{i=1}^3 \frac{1}{\mu^2} = 3(\frac{1}{4^2}) = \frac{3}{16} $$
+
+This **is not an exponential distribution**, we use $M/G/1$ equations:
+
+The **average number of delayed persons** ($L_Q$), with $\rho = \frac{\lambda}{\mu_t} = \frac{1}{\frac{4}{3}} = \frac{3}{4}$ is:
+
+$$ L_Q = \frac{ \rho^2 (1 + \sigma^2 \mu^2) }{ 2(1-\rho) } = \frac{ (\frac{3}{4})^2(1+\frac{3}{16}(\frac{4}{3})^2) }{ 2(1-\frac{3}{4}) } = \frac{3}{2} $$
+
+The **the total mean time a customer spends in the system**, ($\omega$):
+
+$$ \omega = \omega_Q + \frac{1}{\mu} = \frac{L_Q}{\lambda} + \frac{1}{\mu} = \frac{3}{2} + \frac{1}{ \frac{4}{3} } = \frac{9}{4} $$
