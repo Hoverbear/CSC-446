@@ -184,5 +184,17 @@ Determining:
 
 * $\mu = \frac{1}{90 s}$
 * Utilization: $\rho = \frac{ \lambda }{ \mu } = \frac{ \frac{1}{120} \text{per second} }{ \frac{1}{90 s} } = \frac{3}{4}$
-* $L_Q = \frac{ \rho^2(1+\sigma^2\mu^2) }{ 2(1-\rho) }$
-* $\omega_Q = \frac{ \lambda(\frac{1}{\mu^2} + \sigma^2) }{ 2(1-\rho) }$
+* $L_Q = \frac{ \rho^2(1+\sigma^2\mu^2) }{ 2(1-\rho) } = \frac{ (\frac{3}{4})^2(1+90^2(\frac{1}{90})^2)  }{ 2(1-\frac{3}{4}) } = \frac{9}{4} \text{ planes}$
+* $\omega_Q = \frac{ \lambda(\frac{1}{\mu^2} + \sigma^2) }{ 2(1-\rho) } = \frac{ \frac{1}{120} (\frac{1}{\frac{1}{90^2}} + 90^2) }{ 2(1-\frac{3}{4}) } = 270 s$
+
+At $\frac{25}{18}$ USD per second, the average cost is $270(\frac{25}{18}) = 375$ USD.
+
+## Question 6
+
+<!-- TODO -->
+
+## Question 7
+
+<!-- TODO -->
+
+## Question 8
