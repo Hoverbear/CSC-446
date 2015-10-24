@@ -239,7 +239,35 @@ By those accounts, the $M/M/2$ style queue helps reduce the individual wait time
 
 ## Question 7
 
-<!-- TODO -->
+This is an $M/M/4/3/\infty$ system with the following probabilities:
+
+| p  | Type                     |
+|----|--------------------------|
+| .2 | 3 min (Rinse)            |
+| .7 | 7 min (Wash, Rinse)      |
+| .1 | 12 min (Was, Rinse, Wax) |
+
+The arrival rate, $\lambda = 34 \frac{cars}{hr} = \frac{34}{60} \frac{cars}{min}$. We further note that if a car arrives at the car wash when there is $>n$ cars there ($n$ being the number of stalls) it will be turned away.
+
+$\therefore$ We seek to calculate $P_3$ (for the three stall case) and $P_4$ (for the 4 stall case).
+
+First, $P_3$ in the three stall case:
+
+$$ \mu = a = \frac{1}{ .2(3) + .7(7) + .1(12) } = \frac{10}{67} $$
+$$ \rho = \frac{\lambda}{c\mu} = \frac{ \frac{34}{60} }{ 1(\frac{10}{67}) } = 3.796 $$
+$$ P_0 = \frac{1}{ 1 + \sum_{n=1}^c \frac{a^n}{n!} + \frac{a}{c!} \sum_{n=c+1}^N \rho^{n-c} } = \frac{1}{ 1+\frac{ \frac{10}{67} }{1!} + \frac{ (\frac{10}{67})^1 }{1!}((\frac{10}{67})^{2-1} + (\frac{10}{67})^{3-1}) } = 0.8511... $$
+$$ P_3 = \frac{a^NP_0}{c!c^{N-c}} = \frac{ (\frac{10}{67})^3 (0.8511) }{ 1!1^{3-1} } = 0.00289 $$
+
+$\therefore$ there is a .2% chance for a customer to arrive and be dropped from the line.
+
+Then, $P_4$ in the four stall case:
+
+$$ \mu = a = \frac{1}{ .2(3) + .7(7) + .1(12) } = \frac{10}{67} $$
+$$ \rho = \frac{\lambda}{c\mu} = \frac{ \frac{34}{60} }{ 1(\frac{10}{67}) } = 3.796 $$
+$$ P_0 = \frac{1}{ 1 + \sum_{n=1}^c \frac{a^n}{n!} + \frac{a}{c!} \sum_{n=c+1}^N \rho^{n-c} } = \frac{1}{ 1+\frac{ \frac{10}{67}) }{1!} + \frac{ (\frac{10}{67})^1 }{1!}((\frac{10}{67})^{2-1} + (\frac{10}{67})^{3-1} (\frac{10}{67})^{4-1}) } = 0.8535... $$
+$$ P_3 = \frac{a^NP_0}{c!c^{N-c}} = \frac{ (\frac{10}{67})^4 (0.8535) }{ 1!1^{4-1} } = 0.0004235 $$
+
+$\therefore$ there is a .04% chance for a customer to arrive and be dropped from the line.
 
 ## Question 8
 
