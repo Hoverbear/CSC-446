@@ -194,7 +194,48 @@ At $\frac{25}{18}$ USD per second, the average cost is $270(\frac{25}{18}) = 375
 
 ## Question 6
 
-<!-- TODO -->
+For an $M/M/1$ queues with a $\lambda$ arrival rate:
+
+$$ \rho = \frac{\lambda}{\mu} $$
+$$ L = \frac{\lambda}{\mu-\lambda} = \frac{\rho}{1-\rho} $$
+$$ L_Q = \frac{\lambda^2}{\mu(\mu-\lambda)} = \frac{\rho^2}{1-\rho} $$
+$$ \omega = \frac{1}{\mu-\lambda} = \frac{\rho}{1-\rho} $$
+$$ \omega_Q = \frac{\mu}{\mu-\lambda} = \frac{\rho}{\mu(1-\rho)} $$
+
+For two:
+
+$$ L_T = L_1 + L_2 $$
+$$ L_{Q,T} = L_{Q,1} + L_{Q_2} $$
+$$ \omega_T = \omega_1 + \omega_2 $$
+$$ \omega_{Q,T} = \omega_{Q,1} + \omega_{Q,2} $$
+
+For an $M/M/2$ queue with $2\lambda$ arrival rate, and $c=2$:
+
+$$ \rho = \frac{2\lambda}{c\mu} = \frac{\lambda}{\mu} $$
+$$ L = c\rho + \frac{ (c\rho)^{c+1}P_0 }{ c(c!)(1-\rho)^2 } = c\rho + \frac{ \rho P(L(\infty) \geq c) }{ 1-\rho } $$
+$$ L_Q = 2\lambda\omega_Q $$
+$$ \omega = \frac{L}{2\lambda} $$
+$$ \omega_Q = \omega - \frac{1}{\mu} $$
+
+Unfortunately the equations significantly differ, however we can note that the utilization remains the same between the two scenarios. This means that there are no catastrophic effects.
+
+We'll test using $\lambda = 4$ and $\mu = 8$:
+
+In the two $M/M/1$ case we calculate:
+
+$$ \rho = \frac{\lambda}{\mu} = \frac{4}{8} = \frac{1}{2} $$
+$$ L = \frac{\rho}{1-\rho} = \frac{ \frac{1}{2} }{ 1 - \frac{1}{2} } = 1 $$
+$$ \omega = \frac{\rho}{1-\rho} = \frac{\frac{1}{2}}{1-\frac{1}{2}} = 1 $$
+
+In the $M/M/2$ case we calculate:
+
+$$ \rho = \frac{2\lambda}{2\mu} = \frac{1}{2} $$
+$$ P_0 = (\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + (c\rho)^c(\frac{1}{c!})(\frac{1}{1-\rho}))^{-1} = (\frac{(2\frac{1}{2})^1}{1!} + (2\frac{1}{2})^2(\frac{1}{2!})(\frac{1}{1-\frac{1}{2}}))^{-1} = \frac{1}{2} $$
+$$ P(L(\infty) \geq c) = \frac{(c\rho)^cP_0}{c!(1-\rho)} = \frac{ (2\frac{1}{2})^2\frac{1}{2} }{ 2!(1-\frac{1}{2}) } = \frac{1}{2} $$
+$$ L = c\rho + \frac{ \rho P(L(\infty) \geq c) }{ 1-\rho } = 2\frac{1}{2} + \frac{ \frac{1}{2} * \frac{1}{2} }{ 1-\frac{1}{2} } = \frac{3}{2} $$
+$$ \omega = \frac{\frac{3}{2}}{2*4} = \frac{3}{16} $$
+
+By those accounts, the $M/M/2$ style queue helps reduce the individual wait times, but does not otherwise contribute to the efficiency or capability of the system.
 
 ## Question 7
 
