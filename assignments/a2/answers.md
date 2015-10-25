@@ -287,6 +287,30 @@ The **average number of delayed persons** ($L_Q$), with $\rho = \frac{\lambda}{\
 
 $$ L_Q = \frac{ \rho^2 (1 + \sigma^2 \mu^2) }{ 2(1-\rho) } = \frac{ (\frac{3}{4})^2(1+\frac{3}{16}(\frac{4}{3})^2) }{ 2(1-\frac{3}{4}) } = \frac{3}{2} $$
 
-The **the total mean time a customer spends in the system**, ($\omega$):
+The **total mean time a customer spends in the system**, ($\omega$):
 
 $$ \omega = \omega_Q + \frac{1}{\mu} = \frac{L_Q}{\lambda} + \frac{1}{\mu} = \frac{3}{2} + \frac{1}{ \frac{4}{3} } = \frac{9}{4} $$
+
+## Question 9
+
+$$ .9(x) = \lambda $$
+$$ x = \frac{5}{.9} = 5.5 $$
+
+The **long run expected delay** will be $\omega_Q$ since "delay" only accounts for time not spent processing.
+
+Time spent waiting in the repair portion, an $M/M/2/\infty/\infty$ system, $c=2$, $\lambda=5.5$:
+
+$$ \rho_{\text{Repair}} = \frac{\lambda}{\mu} = \frac{5.5}{2(3)} = \frac{5.5}{6} $$
+$$ P_0 = \frac{1}{ \sum_{n=0}^{c-1} (\frac{(c\rho)^n}{n!}) + ((c\rho)^c(\frac{1}{c!})(\frac{1}{1-\rho})) } = \frac{1}{ (\frac{(2\frac{5.5}{6})^1}{1!}) + ((2\frac{5.5}{6})^2(\frac{1}{2!})(\frac{1}{1-\frac{5.5}{6}})) } = \frac{1}{22} $$
+$$ P(L(\infty) \geq c) = \frac{ (\frac{\lambda}{\mu})^cP_0 }{ c!(1-\rho) } = \frac{ (\frac{5.5}{3})^(2) \frac{1}{22} }{ 2!(1-\frac{5.5}{6}) } = \frac{11}{12} $$
+$$ L = c\rho + \frac{\rho P(L(\infty) \geq c)}{ 1-\rho } = 2(\frac{5.5}{6}) + \frac{\frac{5.5}{6} * \frac{11}{12} }{ 1 - \frac{5.5}{6} } = 11.9 $$
+$$ \omega_{Q, \text{Repair}} = \omega - \frac{1}{\mu} = \frac{L}{\mu} - \frac{1}{\mu} = \frac{11.9}{3} - \frac{1}{3} = 3.63 $$
+
+Time spent waiting in the inspection portion, an $M/M/1$ queue with $\lambda = 5.5$, $\mu=8$:
+
+$$ \rho = \frac{\lambda}{\mu} = \frac{5.5}{8} $$
+$$ \omega_{Q, \text{Inspection}} = \frac{\rho}{\mu(1-\rho)} = \frac{\frac{5.5}{8}}{8(1-\frac{5.5}{8})} = \frac{11}{40} $$
+
+The total is $\omega_{Q, \text{Repair}}+\omega_{Q, \text{Inspection}} = 3.63 + \frac{11}{40} = 3.905$.
+
+The **maximum arrival rate** that the system can handle without adding personnel would be $6$, however since there is a 10% feedback we must calculate $\lambda=6*.9=5.4$.
