@@ -1,0 +1,7 @@
+[package]
+name = "q1"
+version = "0.1.0"
+authors = ["Andrew Hobden <andrew@hoverbear.org>"]
+
+[dependencies]
+rand = "*"
