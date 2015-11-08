@@ -23,7 +23,8 @@ fn float_sort (a: &f64, b: &f64) -> Ordering {
     }
 }
 
-fn main() {
+fn ks_test() {
+    println!("--- Beginning KS Test ---");
     
     // Seed and gather a sample of randoms.
     seed_rand(SEED);
@@ -33,7 +34,7 @@ fn main() {
         
     // Sort them smallest to largest.
     randoms.sort_by(float_sort);
-    println!("Rands {:?}", randoms);
+    println!("rands {:?}", randoms);
     
     // Calculate the values as per slide 33, chapter 8.
     let mut d_plus_set = randoms.iter().enumerate().map(|(index, &r_i)| {
@@ -42,7 +43,7 @@ fn main() {
     d_plus_set.sort_by(float_sort);
     // Get the max.
     let d_plus = d_plus_set.last().unwrap();
-    println!("Plus {:#?}", d_plus);
+    println!("d_plus: {:#?}", d_plus);
     
     // Calculate the values as per slide 33, chapter 8.
     let mut d_minus_set = randoms.iter().enumerate().map(|(index, &r_i)| {
@@ -51,15 +52,22 @@ fn main() {
     d_minus_set.sort_by(float_sort);
     // Get the Max
     let d_minus = d_minus_set.last().unwrap();
-    println!("Mins {:#?}", d_minus);
+    println!("d_minus: {:#?}", d_minus);
     
+    // Choose the max.
     let d_max = if d_plus >= d_minus { d_plus } else { d_minus };
-    println!("Selected D: {:#?}", d_max);
+    println!("d_max: {:#?}", d_max);
     println!("Critical Value: {:#?}", KS_TABLE_VALUE);
     
+    // Decide on reject/accept.
     if *d_max <= KS_TABLE_VALUE {
-        println!("Accept.");
+        println!("Choice: Accept.");
     } else {
-        println!("Reject");
+        println!("Choice: Reject");
     }
+}
+
+fn main() {
+    ks_test();
+    
 }
