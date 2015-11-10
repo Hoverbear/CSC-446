@@ -6,8 +6,6 @@ const NUM_INTERVALS: u64 = 10;
 const RANGE_BOTTOM: f64 = 0.0;
 const RANGE_TOP: f64 = 1.0;
 const TABLE_RESULT: f64 = 16.9;
-const EXPECTED_IN_BINS: u64 = (SAMPLES as u64 / NUM_INTERVALS);
-const INTERVAL_SIZE: f64 = (RANGE_TOP - RANGE_BOTTOM) / (NUM_INTERVALS as f64);
 
 fn generate() -> Vec<f64> {
     // Necessary for the first two...
@@ -31,36 +29,44 @@ fn generate() -> Vec<f64> {
     output
 }
 
-fn main() {
-    // Generate 'randoms'.
-    let randoms = generate();
+fn chi_squared_test(values: &[f64], intervals: u64, expected: f64) {
+    let samples = values.len();
+    let expected_in_bins = samples as u64 / intervals;
+    let interval_size = 1.0 / (intervals as f64);
     
     // Create bins.
     let mut bins = Vec::new();
-    for _ in 0..NUM_INTERVALS {
+    for _ in 0..intervals {
         bins.push(0);
     }
     
     // Bin values.
-    for random in randoms {
-        let destination_bin = (random / INTERVAL_SIZE) as usize;
+    for value in values {
+        let destination_bin = (value / interval_size) as usize;
         bins[destination_bin] += 1;
     }
     println!("Bins: {:?}", bins);
     
     // (O_i - E_i)^2 / E_i
     let sum = bins.iter().fold(0.0f64, |mut acc, bin| {
-        let computed = (bin - EXPECTED_IN_BINS as isize).pow(2) as f64 / EXPECTED_IN_BINS as f64;
+        let computed = (bin - expected_in_bins as isize).pow(2) as f64 / expected_in_bins as f64;
         acc += computed;
         acc
     });
     
-    println!("Chi Squared result: {}, expected: {}", sum, TABLE_RESULT);
+    println!("Chi Squared result: {}, expected: {}", sum, expected);
     
     // Accept or reject based on table.
-    if sum > TABLE_RESULT {
+    if sum > expected {
         println!("Reject");
     } else {
         println!("Accept");
     }
+}
+
+fn main() {
+    // Generate 'randoms'.
+    let randoms = generate();
+    chi_squared_test(&randoms, NUM_INTERVALS, TABLE_RESULT);
+    
 }
