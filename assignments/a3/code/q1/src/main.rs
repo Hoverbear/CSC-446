@@ -5,7 +5,7 @@ const SAMPLES: usize = 1000; // Must be greater than 2.
 const NUM_INTERVALS: u64 = 10;
 const RANGE_BOTTOM: f64 = 0.0;
 const RANGE_TOP: f64 = 1.0;
-const TABLE_RESULT: f64 = 16.9;
+const TABLE_RESULT: f64 = 16.9; // x_0.05^2 with 9 DOF
 
 fn generate() -> Vec<f64> {
     // Necessary for the first two...
