@@ -111,3 +111,43 @@ See `./code/q6/src/main.rs`. You can [install Rust](https://doc.rust-lang.org/st
 ```
 
 ## Question 7
+
+See `./code/q7/src/main.rs`. You can [install Rust](https://doc.rust-lang.org/stable/book/installing-rust.html) and run it with `cargo run` from the `./code/q7/` directory.
+
+```
+Generated bins: [
+    418,
+    219,
+    144,
+    98,
+    52,
+    31,
+    15,
+    5,
+    6,
+    2,
+    10
+]
+Normalized bins: [
+    0.418,
+    0.219,
+    0.144,
+    0.098,
+    0.052,
+    0.031,
+    0.015,
+    0.005,
+    0.006,
+    0.002,
+    0.01
+]
+```
+
+Resulting in the following plots:
+
+![](q7.png)\
+
+![](q7-2.png)\
+
+
+The generated numbers are coarsely exponential.
