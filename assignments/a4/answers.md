@@ -62,11 +62,21 @@ Using $E_i = n*p(x) = n\frac{e^{-\alpha} \alpha^x}{x!}$ where $\alpha=?$.
 
 Since we don't know $\alpha$ we must estimate the parameter, $\hat \alpha = \bar X = \frac{ \sum_{j=1}^c f_jm_j }{n}$
 
-$$ \bar X = \frac{ \sum_{j=1}^c f_jm_j }{n} = \frac{ 0.5*35 + 1*40 + 2*13 + 3*6 + 5*1 + 6*1 }{ 7 } = 16 $$
+$$ \hat \alpha = \bar X = \frac{ \sum_{j=1}^c f_jm_j }{n} = \frac{ 0*35 + 1*40 + 2*13 + 3*6 + 5*1 + 6*1 }{ 7 } = 13 \frac{4}{7} $$
 
-Which doesn't make sense.
+$$ E_i = n*p(x) = 100*\frac{e^{-13 \frac{4}{7}} (13 \frac{4}{7})^x}{x!} $$
 
-<!-- TODO -->
+| $x_i$ | $O_i$ | $E_i$ | $\frac{(O_i - E_i)^2}{E_i}$ |
+|-------|-------|-------|-----------------------------|
+| 0     | 35    | 0.0001278274   | |
+| 1     | 40    | 0.1734617519   | |
+| 2     | 13    | 1.1769379865  | |
+| 3     | 6     | 5.3236828255  | |
+| 4     | 4     | 18.0605939856  | |
+| 5     | 1     | 49.0164520769  | |
+| 6     | 1     | 110.8588757805 | |
+
+Which clearly makes no sense...
 
 ## Q2.b
 
@@ -74,21 +84,21 @@ Using $E_i = n*p(x) = n\frac{e^{-\alpha} \alpha^x}{x!}$ where $\alpha=1$.
 
 | $x_i$ | $O_i$ | $E_i$ | $\frac{(O_i - E_i)^2}{E_i}$ |
 |-------|-------|-------|-----------------------------|
-| 0     | 35    | 2.5   | |
-| 1     | 40    | 2.5   | |
-| 2     | 13    | 1.28  | |
-| 3     | 6     | 0.42  | |
-| 4     | 4     | 0.10  | |
-| 5     | 1     | 0.02  | |
-| 6     | 1     | 0.003 | |
+| 0     | 35    | 36.7879441171 | 0.0868965158 |
+| 1     | 40    | 36.7879441171 | 0.2804533725 |
+| 2     | 13    | 18.3939720586 | 1.5817646388 |
+| 3     | 6     | 6.1313240195  | 0.002812769  |
+| 4     | 4     | 1.5328310049  | 3.9710332262 |
+| 5     | 1     | 0.306566201   | 1.5685043951 |
+| 6     | 1     | 0.0510943668  | 17.6227235317 |
 
-Which also makes no sense.
+$$ X^2_0 = 25.114188449 $$
 
-<!-- TODO -->
+Since $X^2_0 >= 124.3$ we accept.
 
 ## Q2.c
 
-<!-- TODO -->
+Part (a) is only testing if the distribution fits Poisson, whereas Part (b) is actually testing Poisson with a specific parameter.
 
 # Question 3
 
