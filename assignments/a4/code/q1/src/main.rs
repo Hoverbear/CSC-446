@@ -16,10 +16,6 @@ fn inverse_exponential(rand: f64, mean: f64) -> f64 {
     (-1.0*(1.0-rand).ln()) / mean // Log base e.
 }
 
-fn expo_cdf(val: f64, mean: f64) -> f64 {
-    
-}
-
 fn float_sort (a: &f64, b: &f64) -> Ordering {
     // Sorting f64s is hard because they can be NaN.
     match a.lt(&b) {
@@ -69,10 +65,10 @@ fn main() {
 
     let chi_squared = intervals.iter().enumerate().fold(0.0f64, |mut acc, (index, &value)| {
         let x = (index as f64 * CLASS_INTERVALS as f64) / SAMPLES as f64 + 0.015; // Midpoint
-        println!("{}", x);
-        let expected_frequency = SAMPLES as f64 * exponential(x, MEAN);
-        println!("Expected Frequency: {}", expected_frequency);
+        println!("Bin {}", x);
+        let expected_frequency = 15.0;
         let result = (value as f64 - expected_frequency).powf(2.0) / expected_frequency;
+        println!("Observed {}, Expected Frequency: {}, Result: {}", value, expected_frequency, result);
         acc += result;
         acc
     });

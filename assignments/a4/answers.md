@@ -45,11 +45,14 @@ The largest value $v = k-s-1$ on the table with appropriate precision is $k=30, 
 
 $$ X_0^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i} $$
 
-Where $E_i = np = n*\lambda e^{-\lambda x}$.
+Where $E_i = np = n*\lambda e^{-\lambda x}$, $E_i = 0.2*30 = 15$.
+
+The Chi-Squared test yields a value greater than $X^2_{0.05}$, and we reject.
+
 
 ## Q1.d
 
-<!-- TODO -->
+Since these values are smaller than $X^2_{0.05}$ they are also rejected.
 
 # Question 2
 
