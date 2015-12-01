@@ -43,6 +43,12 @@ The largest value $v = k-s-1$ on the table with appropriate precision is $k=30, 
 ![](q1_chi_chart.png)\
 
 
+$$ X_0^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i} $$
+
+Where $E_i = np = n*\lambda e^{-\lambda x}$.
+
+## Q1.d
+
 <!-- TODO -->
 
 # Question 2
@@ -171,6 +177,8 @@ The generated $X_t$ values from OO Calc:
 
 ### EAR(1)
 
+* Unfortunately $\mu$ is never defined in the slides for EAR, only for AR.
+
 Setting $h=1$, $\bar X = 20.05$, $\hat \sigma^2 = 15.4184210526$.
 
 To estimate lag-1autocorrelation:
@@ -183,7 +191,10 @@ $$ \hat \phi = \hat \rho = \frac{ 6.4 }{ 15.4 } = 0.41 $$
 
 $$ \hat \lambda = \frac{1}{20.05} $$
 
-<!-- TODO -->
+![](q4_ear_chart.png)\
+
+
+The AR provides a better fit for this data.
 
 # Question 5
 
