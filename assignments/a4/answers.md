@@ -183,9 +183,59 @@ $$ \hat \phi = \hat \rho = \frac{ 6.4 }{ 15.4 } = 0.41 $$
 
 $$ \hat \lambda = \frac{1}{20.05} $$
 
+<!-- TODO -->
 
 # Question 5
 
 * Question does not specify **which** Single Server System to use, so using the one from A2 which already calculates the delay.
 
-Since the new mean service time is 2 and $\rho = \frac{ \lamba }{ \mu }$ then average Interarrival = 1.4
+Since the new mean service time is 2 and $\rho = \frac{ \lambda }{ \mu }$ then average Interarrival = 2.857.
+
+|Seed | w       |
+|-----|---------|
+|1    | 7.08269 |
+|2    | 7.81672 |
+|3    | 6.12031 |
+|4    | 6.43309 |
+|5    | 6.29581 |
+|6    | 6.17629 |
+|7    | 6.56624 |
+|8    | 6.50348 |
+|9    | 6.32141 |
+|10   | 6.58256 |
+
+## Q5.a
+
+The point estimator is
+
+$$ \hat \theta = \frac{1}{n} \sum_{i=1}^n Y_i = 6.58986 $$
+
+The confidence-interval estimation is
+
+$$\bar Y_{..} \pm t_{\alpha / 2, R-1} \frac{S}{\sqrt{R}} \text{ where } t_{\alpha / 2, R-1} \text{ is the quantile of the t-distribution.} $$
+
+Noting:
+
+* $S^2 = \frac{1}{R-1} \sum_{i=1}^R (Y_{i.} - Y_{..})^2$ is the sample variance.
+* $\bar Y_{..} = \sum_{i=1}^R \frac{Y_{i.}}{R}$ where $R$ is the number of independent replications.
+* Using periods to notate subscripts is a pretty devious syntax use and should be discouraged. It's basically impossible to tell if they are being used for one thing or another. Like $p$ and $\rho$.
+
+$$ \bar Y_{..} = \sum_{i=1}^R \frac{Y_{i.}}{R} = 6.58986 $$
+
+$$ S = \frac{1}{R-1} \sum_{i=1}^R (Y_{i.} - Y_{..})^2 = \sqrt{ \frac{1}{10-1} * 2.3307645526 } = 0.5088947 $$
+
+$$ \bar Y_{..} \pm t_{\alpha / 2, R-1} \frac{S}{\sqrt{R}} = 6.58986 \pm 1.83 * \frac{0.5088947}{\sqrt{10}} = 6.58986 \pm 0.29449 $$
+
+The prediction interval is:
+
+$$ Y_.. \pm t_{a/2, R-1} S \sqrt{ 1 + \frac{1}{R} } = 6.58986 \pm 1.83 * 0.5088947 \sqrt{1+\frac{1}{10}} = 6.58986 \pm 0.976732 $$
+
+## Q5.b
+
+$$ \frac{ Z_{0.0} * 0.5088947 }{ 0.5 } = \frac{2.26^2 * 0.5088947}{0.5} = 5.19 $$
+
+No, it isn't.
+
+## Q5.c
+
+The confidence interval became more "accurate", the prediction interval became smaller. Since the system is steady state, the results are reasonably similar.
